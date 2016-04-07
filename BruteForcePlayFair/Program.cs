@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,25 +12,32 @@ namespace BruteForcePlayFair
         static void Main(string[] args)
         {
             string key = "aaaa";
-            string cipherText = "LOXKT YNKAE RAFSK DPMEB BQNEP MOMPH TEXFS NPOHU TELOP NUPNSYGCLO NLMNB FKMSR AGOPI ABMSU TPQSM MURKG KIRQO FSOQQ UEY ".Replace(" ", "").ToLower();
+            string cipherText = "UGVWE PSLBI LMSQI FRPWN HEISI GSPNT GRRLO KPKMT UZREN ALGUS IDEPNEGSPE SILUS IXAGZ CLMTE CADTM GAHES XEPTA GIAHY TWCFT STHCE LRLFTTMUIX DME ".Replace(" ", "").ToLower();
 
             string plaintext = "";
-            string plainword = "TEHNICE";
+            string plainword = "POPOR";
+
+            if (File.Exists("output.txt"))
+                File.Delete("output.txt");
 
             do
             {
                 EncryptionAlgorithms.PlayFair pf = new EncryptionAlgorithms.PlayFair(key);
                 plaintext = pf.Decrypt(cipherText);
                 if (plaintext.Contains(plainword.ToLower()))
-                    break;
+                {
+                    //Console.WriteLine(key);
+                    //Console.WriteLine(plaintext);
+                    File.AppendAllText("output.txt", "key: " + key + "\nplaintext: " + plaintext.Replace("x", "") + "\n");
+                }
                 key = incrementKey(key).ToLower();
             }
-            while (!plaintext.Contains(plainword.ToLower()));
+            while (key.Length == 4);
 
-            //print plain text
-            Console.WriteLine(key);
-            Console.WriteLine();
-            Console.WriteLine(plaintext.Replace("x", ""));
+            ////print plain text
+            //Console.WriteLine(key);
+            //Console.WriteLine();
+            //Console.WriteLine(plaintext.Replace("x", ""));
             //Console.ReadKey();
         }
 
