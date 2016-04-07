@@ -10,20 +10,21 @@ namespace BruteForcePlayFair
     {
         static void Main(string[] args)
         {
-            string key = "a";
+            string key = "aaaa";
             string cipherText = "LOXKT YNKAE RAFSK DPMEB BQNEP MOMPH TEXFS NPOHU TELOP NUPNSYGCLO NLMNB FKMSR AGOPI ABMSU TPQSM MURKG KIRQO FSOQQ UEY ".Replace(" ", "").ToLower();
-            //string cipherText = "IFTLQ OYTSQ MRBSM BXEKH LQKES HWRNS EXIMH SOQGQ EFLAO QHSMEEFLUL KSHMO PMFLX CMVMK SUNSR PNMMA HALWQ PMNQL CLEKQ OAREKRBRPE FFIAR LMMCQ LOIDS MKODR BFQMC EKSDA MFKQK NMKEZ PSNGRRLFMC OSFQL AHSLH SNSQT EA ".Replace(" ", "").ToLower();
+
             string plaintext = "";
+            string plainword = "TEHNICE";
 
             do
             {
                 EncryptionAlgorithms.PlayFair pf = new EncryptionAlgorithms.PlayFair(key);
                 plaintext = pf.Decrypt(cipherText);
-                if (plaintext.Contains("TEHNICE".ToLower()))
+                if (plaintext.Contains(plainword.ToLower()))
                     break;
                 key = incrementKey(key).ToLower();
             }
-            while (!plaintext.Contains("TEHNICE".ToLower()));
+            while (!plaintext.Contains(plainword.ToLower()));
 
             //print plain text
             Console.WriteLine(key);
